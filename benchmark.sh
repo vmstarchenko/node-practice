@@ -1,7 +1,7 @@
 #!/bin/sh
 
-for bench in 20 25 30 35; do
-    ab -n 100 -g "out_$bench" "http://localhost:8082/fib/$bench"
+for bench in 10 50 100; do
+    ab -n 1000 -c $bench -g "out_$bench" "http://localhost:8082/fib/35"
 done;
 
 gnuplot plot.p

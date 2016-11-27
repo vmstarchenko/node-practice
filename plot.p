@@ -5,7 +5,6 @@ set size 1,1
 set grid y
 set xlabel "request"
 set ylabel "response time (ms)"
-plot "out_20" using 9 with lines title "out20", \
-    "out_25" using 9 with lines title "out25", \
-    "out_30" using 9 with lines title "out30", \
-    "out_35" using 9 with lines title "out35"
+plot "out_10" using 9 with lines title "out10", \
+    "out_50" using 9 with lines title "out50", \
+    "out_100" using 9 with lines title "out100"
