@@ -10,23 +10,6 @@ const {fork} = require('child_process');
 const app = express();
 const numCPUs = require('os').cpus().length;
 
-const memoize = function (fn) {
-    const cache = {};
-
-    return function (n) {
-        const cached = cache[n];
-
-        if (typeof cached !== 'undefined') {
-            return cached;
-        }
-
-        const result = fn.call(this, n);
-        cache[n] = result;
-
-        return result;
-    };
-};
-
 if (cluster.isMaster) {
     for (let i = 0; i < numCPUs; i++) {
         cluster.fork();
@@ -35,7 +18,7 @@ if (cluster.isMaster) {
     app.listen(PORT, () => console.log(`App is listening on port ${PORT}`));
 
     app.get('/fib/:n', (req, res) => {
-        const fib = memoize(function (n) {
+        const fib = function (n) {
             assert(typeof n === 'number', 'n must be a number');
 
             if (n === 0) {
@@ -47,7 +30,7 @@ if (cluster.isMaster) {
             }
 
             return fib(n - 1) + fib(n - 2);
-        });
+        };
 
         const {n} = req.params;
 
