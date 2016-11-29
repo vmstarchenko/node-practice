@@ -9,7 +9,7 @@ const fib = function (n) {
         return 0;
     }
 
-    if (n === 1 || n === 2) {
+    if (n === 1) {
         return 1;
     }
 
